@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -38,7 +37,15 @@ const Nav = () => {
             <Link href='/create-prompt' className='black_btn'>
               Create Prompt
             </Link>
-            <button type='button' onClick={signOut} className='outline_btn'>
+            <button
+              type='button'
+              onClick={() => {
+                signOut({
+                  callbackUrl: `${window.location
+                                        .origin}`
+                })
+              }}
+              className='outline_btn'>
               Sign Out
             </button>
             <Link href='/profile'>
@@ -58,7 +65,13 @@ const Nav = () => {
             Object.values(providers)
                   .map(
                     (provider) => (
-                      <button type='button' key={provider.name} onClick={() => signIn(provider.id)} className='black_btn'>
+                      <button 
+                      type='button' 
+                      key={provider.name} 
+                      onClick={() => {
+                        signIn(provider.id)
+                      }} 
+                      className='black_btn'>
                         Sign In
                       </button>
                     )
@@ -87,11 +100,14 @@ const Nav = () => {
                 <Link href='/create-prompt' className='dropdown_link' onClick={() => setToggleDropdown(false)}>
                   Create Prompt
                 </Link>
-                <button 
-                  type='button' 
+                <button
+                  type='button'
                   onClick={() => {
                     setToggleDropdown(false)
-                    signOut
+                    signOut({
+                      callbackUrl: `${window.location
+                                            .origin}`
+                    })
                   }}
                   className='mt-5 w-full black_btn'
                 >
@@ -106,7 +122,13 @@ const Nav = () => {
             Object.values(providers)
                   .map(
                     (provider) => (
-                      <button type='button' key={provider.name} onClick={() => signIn(provider.id)} className='black_btn'>
+                      <button
+                        type='button'
+                        key={provider.name}
+                        onClick={() => {
+                          signIn(provider.id)
+                        }} 
+                        className='black_btn'>
                         Sign In
                       </button>
                     )

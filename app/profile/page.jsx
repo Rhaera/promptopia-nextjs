@@ -35,17 +35,20 @@ const MyProfile = () => {
             setPosts(data)
         }
         if (session?.user
-                    .id) fetchPosts()
-    }, [])
+                    .id) {
+            fetchPosts()
+        }
+    }, [session?.user
+                .id])
     return (
-    <Profile
-    name="My"
-    desc="Welcome to your personalized Profile Page"
-    data={posts}
-    handleEdit={handleEdit}
-    handleDelete={handleDelete}
-    />
-  )
+        <Profile
+        name={session ? "My" : ""}
+        desc={session ? "Welcome to your personalized Profile Page" : ""}
+        data={posts}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        />
+    )
 }
 
 export default MyProfile
